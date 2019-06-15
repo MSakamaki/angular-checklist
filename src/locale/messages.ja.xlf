@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="ja">
+    <body>
+      <trans-unit id="aboutDialogTitle" datatype="html">
+        <source>🤔 What is it?</source><target state="translated">🤔 これは何ですか？</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageTop" datatype="html">
+        <source>
+    Angular Checklist is a curated list of best practices that we believe every application should follow in order to
+    avoid some common pitfalls.
+  </source><target state="translated">
+    Angular Checklistは、よくある落とし穴を避けるために、すべてのアプリケーションが従うべきなベストプラクティスの一覧表です。
+  </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageMiddle" datatype="html">
+        <source>
+    The idea is that for all your projects, you can go over the checklist and see which items your projects already
+    comply with and which you still have to put in some more effort!
+  </source><target state="translated">
+    このアイディアは、あなたのすべてのプロジェクトをチェックリストを見ながら、あなたのどのプロジェクトがどの項目を順守しているか、そしてまだどれをもっと改善しないといけないかを見ることができます！</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aboutDialogMessageBottom" datatype="html">
+        <source>If you follow the items in this list, your project will definitely be on track to success 🏆!</source><target state="translated">このリストの項目に従っていけば、あなたのプロジェクトは間違いなく成功に向かって進むでしょう 🏆!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/about-dialog/about-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="footerContribute" datatype="html">
+        <source>Contribute</source><target state="translated">貢献する</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/footer/footer.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="footerAbout" datatype="html">
+        <source>About</source><target state="translated">要約</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/footer/footer.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="toolbarTitle" datatype="html">
+        <source>Angular Checklist</source><target state="new">Angular Checklist</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/toolbar/toolbar-logo/toolbar-logo.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="authorsCreaters" datatype="html">
+        <source>Made with</source><target state="translated">作成者</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/authors/authors.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogExistsError" datatype="html">
+        <source>Project already exists</source><target state="translated">プロジェクトはすでに存在します。</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogDengerZoneSection" datatype="html">
+        <source>DANGER ZONE</source><target state="translated">危険区域</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogDeleteProject" datatype="html">
+        <source>Delete Project</source><target state="translated">プロジェクトの削除</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogConfirmMessage" datatype="html">
+        <source>Once you delete a project, there is no going back. Please be certain.</source><target state="translated">削除したらプロジェクトは元に戻せません。 確実に進めてください。</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogConfirmMessageHint" datatype="html">
+        <source>Please type in the project name to confirm.</source><target state="translated">確認するためにプロジェクト名を入力してください。</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogSubmitButton" datatype="html">
+        <source>
+            Delete this Project
+          </source><target state="translated">
+            プロジェクトの削除
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projectDialogCancel" datatype="html">
+        <source>Cancel</source><target state="translated">キャンセル</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/project-dialog/project-dialog.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewTitle" datatype="html">
+        <source>Welcome to Angular Checklist!</source><target state="translated">Angular Checklist へようこそ!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewSubtitle" datatype="html">
+        <source>Curated list of common mistakes made when developing Angular applications.</source><target state="translated">Angularアプリケーションを開発する際によくあるミスがまとまった一覧</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewMyProjects" datatype="html">
+        <source>Your Projects</source><target state="translated">あなたのプロジェクト</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewProjectAdd" datatype="html">
+        <source>Add Project</source><target state="translated">プロジェクトの追加</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="projecViewProjectProgress" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ project.score | percent: '.0-2' }}"/> completed</source><target state="translated"><x id="INTERPOLATION" equiv-text="{{ project.score | percent: '.0-2' }}"/> 完了</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/projects/projects-view/projects-view.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogCancel" datatype="html">
+        <source>Cancel</source><target state="translated">キャンセル</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/confirmation-dialog/confirmation-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogManageProjects" datatype="html">
+        <source>Manage Projects</source><target state="translated">プロジェクトの管理</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogFavorites" datatype="html">
+        <source>Favorites</source><target state="translated">お気に入り</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogHeader" datatype="html">
+        <source>CATEGORIES</source><target state="translated">カテゴリー</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogEdit" datatype="html">
+        <source>Edit</source><target state="translated">編集</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmDialogUpsEditMode" datatype="html">
+        <source>🧐 Ups, seems like you're in edit mode!</source><target state="translated">🧐 おっと、編集モードになってるようです！</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checkListDetailDone" datatype="html">
+        <source>Done</source><target state="translated">完了</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-detail-view/checklist-detail-view.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checklistViewNoFavorites" datatype="html">
+        <source>You have no favorites yet... but they are only a few clicks away!</source><target state="translated">まだお気に入りがありません…しかし、ほんの数回クリックするだけです！</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-favorites-view/checklist-favorites-view.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checklistMetadataSource" datatype="html">
+        <source>Source</source><target state="new">Source</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-item-metadata/checklist-metadata.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarAll" datatype="html">
+        <source>ALL</source><target state="translated">全て</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarDone" datatype="html">
+        <source>DONE</source><target state="translated">完了</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="checlistCtaBarToto" datatype="html">
+        <source>TODO</source><target state="translated">未完了</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/checklist/checklist-cta-bar/checklist-cta-bar.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

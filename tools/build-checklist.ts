@@ -1,12 +1,15 @@
 import { join } from 'path';
-import { buildChecklist, dumpDataToDisk, printSuccess } from './utils';
+import { buildChecklist, dumpDataToDisk, printSuccess, langages } from './utils';
 
 const CONTENT_FOLDER = join(__dirname, '../content');
 const ASSET_FOLDER = join(__dirname, '../src/assets');
 
 buildChecklist(CONTENT_FOLDER).then(checklist => {
   if (checklist) {
-    dumpDataToDisk('content', checklist, ASSET_FOLDER);
+    langages.forEach(lang => {
+      dumpDataToDisk(`content.${lang}`, checklist[lang], ASSET_FOLDER);
+    });
+
     printSuccess('Content was successfully compiled', 'Done');
     process.exit(0);
   }

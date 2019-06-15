@@ -10,12 +10,19 @@
       target="_blank"
     >
       <fa-icon icon="hands-helping"></fa-icon>
-      <span>Contribute</span>
+      <span i18n="@@footerContribute">Contribute</span>
     </a>
     <button class="cta" (click)="showAbout()">
       <fa-icon icon="info"></fa-icon>
-      <span>About</span>
+      <span i18n="@@footerAbout">About</span>
     </button>
+    <div class="langs">
+      <fa-icon icon="language"></fa-icon>
+      <mat-select [value]="locale" (valueChange)="changeLangage($event)">
+        <mat-option value="en-US">English</mat-option>
+        <mat-option value="ja">日本語</mat-option>
+      </mat-select>
+    </div>
   </div>
   <ac-authors></ac-authors>
 </mat-toolbar>
