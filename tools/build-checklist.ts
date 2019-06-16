@@ -1,16 +1,19 @@
 import { join } from 'path';
-import { buildChecklist, dumpDataToDisk, printSuccess, langages } from './utils';
+import { buildChecklist, dumpDataToDisk, printSuccess, langages, localeEnUS, transrateDeepMerge } from './utils';
 
 const CONTENT_FOLDER = join(__dirname, '../content');
 const ASSET_FOLDER = join(__dirname, '../src/assets');
 
-buildChecklist(CONTENT_FOLDER).then(checklist => {
-  if (checklist) {
-    langages.forEach(lang => {
-      dumpDataToDisk(`content.${lang}`, checklist[lang], ASSET_FOLDER);
-    });
+Promise.all(
+  langages.map(async lang => {
+    const checklist = await buildChecklist(join(CONTENT_FOLDER, lang));
+    const checklistEnUS = await buildChecklist(join(CONTENT_FOLDER, localeEnUS));
 
-    printSuccess('Content was successfully compiled', 'Done');
-    process.exit(0);
-  }
+    if (checklist && checklistEnUS) {
+      dumpDataToDisk(`content.${lang}`, transrateDeepMerge(checklistEnUS, checklist), ASSET_FOLDER);
+    }
+  })
+).then(() => {
+  printSuccess('Content was successfully compiled', 'Done');
+  process.exit(0);
 });
