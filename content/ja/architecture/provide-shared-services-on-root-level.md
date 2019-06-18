@@ -67,7 +67,7 @@ export class SomeFeature {}
 各コンポーネントは親インジェクタから継承された独自のインジェクタを持つため、ルートレベルで提供されるサービスを要求することができます。
 そのため、サービスへ複数のインスタンスを作成することなく、 `SharedModule`によって提供されるすべてのコンポーネント、パイプなどにアクセスできます。
 
-# 追加の資料
+# 関連資料
 
 - [Dependency Injection in Angular](https://blog.thoughtram.io/angular/2015/05/18/dependency-injection-in-angular-2.html) by Pascal Precht
 - [Bypassing Providers in Angular](https://blog.thoughtram.io/angular/2016/09/14/bypassing-providers-in-angular-2.html) by Pascal Precht

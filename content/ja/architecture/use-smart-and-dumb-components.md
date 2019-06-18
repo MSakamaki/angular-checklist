@@ -37,7 +37,7 @@ title: 高性能と最小限の処理しかしないコンポーネントを使�
 * ダムコンポーネントは完全に分離されているためテストが簡単です。
 * あなたのコンポーネントの全体的なアーキテクチャーは、推論しやすくなります。 ビジネスロジックに問題がある場合、またはデータが正しく取得されない場合は、スマートコンポーネントが責任を持つため、スマートコンポーネントから探索をはじめる必要があることがわかります。
 
-# Resources
+# 関連資料
 
 * [Presentational and container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) by Dan Abramov
 * [Smart components vs presentational components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/) by Angular University
