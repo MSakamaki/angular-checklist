@@ -39,7 +39,7 @@ const newState = { ...state, selectedUserId: 2 };
 この例にはデータを含む状態オブジェクトがあります。
 元のオブジェクトを変更せずに、`selectedUserId`プロパティを更新したい時、オブジェクトにスプレッド演算子を使用して、`users`配列への同じ参照を維持しながら`selectedUserId`を2に更新して、新しいオブジェクトを作成します。
 
-**:注意** この方法は私たちが不変性の動きを実現するための1つにすぎません。
+**:注釈** この方法は私たちが不変性の動きを実現するための1つにすぎません。
 スプレッド演算子は最新バージョンのJavaScriptで使用できます。
 [Immutable.js](https://facebook.github.io/immutable-js/)、[Immer](https://github.com/mweststrate/immer)、[Seamless Immutable](https://github.com/rtfeldman/seamless-immutable)といった、大規模なコレクションでパフォーマンスが向上する不変性の動きを助けるライブラリもあります。
 ここで重要なのは、この方法をどのように達成するかだけでなく、不変性を受け入れ、オブジェクトの変更を避けようとすることです。

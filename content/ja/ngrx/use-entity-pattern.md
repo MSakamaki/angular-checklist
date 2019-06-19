@@ -1,18 +1,26 @@
 ---
-title: use the entity pattern for large collections
+title: 大規模なコレクションにエンティティパターンを使用する
 ---
 
-# Problem
+# 問題点
 
-In our applications, we use a lot of arrays to store our data. When we fetch a list of users and we want to show them in the view, we can loop over them really easily using the `*ngFor` directive. We can put that data in our store so that we, for example, don't have to fetch it again later, or if the list is impacted by other components.
+私達のアプリケーションは、データを保存しておくために多くの配列を使います。
+ユーザーの一覧を取得してビューに表示したい場合、`* ngFor`ディレクティブを使うことで簡単にそれらを繰り返することもできます。
+たとえば、後でそのデータを再取得したり、一覧が他のコンポーネントの影響を受けたりしないように、データをストアに保存することができます。
 
-But arrays are not the most performant solution when we want to update, delete, or get a single element out of the list. All these operations have a linear time complexity of O(n). For large collections, this can have a huge impact on the performance.
+しかし、配列を更新、削除、または一覧から特定の行を取得したいときには、配列はパフォーマンスの良い解決策ではありません。
+ れらをすべて計算するのに線形の時間複雑度O(n)を必要とします。
+大規模なコレクションの場合、パフォーマンスに多大な影響を与える可能性があります。
 
-# Solution
+# 解決策
 
 To make the CRUD operations more efficient we can adopt the entity pattern. This means that we will no longer store the data as an array but transform it to an object where the key is the unique identifier of the element and the value is the actual element. This is also called state normalization.
 
-Here's an example.
+CRUDをより効率的にするために、エンティティパターンを使うことが出来ます。
+これはデータを配列として格納するのではなく、キーに要素の一意となる識別子を設定したオブジェクトに変換するということです。
+これは状態正規化(state normalization)とも呼ばれます。
+
+これが例です。
 
 ```ts
 const contacts = [
@@ -21,7 +29,7 @@ const contacts = [
 ];
 ```
 
-We can normalize this into the following:
+上の配列を次のように正規化できます。
 
 ```ts
 const entities = {
@@ -30,10 +38,10 @@ const entities = {
 };
 ```
 
-Now, finding, deleting, or updating an element all have a complexity of O(1).
+これで要素の検索、削除、更新すべてがO(1)の複雑さになります。
 
-**Note:** As this is a common pattern in NgRx, there is a separate package that will help us to implement the entity pattern called `@ngrx/entity`.
+**注釈** これはよくあるNgRxのパターンなので、エンティティパターンを実装するのに便利な`@ngrx/entity`と呼ばれる別パッケージがあります。
 
-# Resources
+# 関連資料
 
 - [@ngrx/entity](https://github.com/ngrx/platform/tree/master/docs/entity)

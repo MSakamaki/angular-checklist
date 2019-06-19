@@ -1,10 +1,12 @@
 ---
-title: don't store state that can be derived
+title: 派生可能な状態を持たない。
 ---
 
-# Problem
+# 問題点
 
-We can use `@ngrx/store` to store data. When we store duplicate data, we are making our reducer logic way more difficult. Take a look at the following type definition for a potential state object:
+データを保存するのに`@ngrx/store`を使うことができます。
+複写されたデータを保持していると、reducerのロジックが一段と複雑になります。
+それが起こり得る状態オブジェクトの次の型定義を見てください：
 
 ```ts
 export interface ApplicationState {
@@ -14,11 +16,20 @@ export interface ApplicationState {
 }
 ```
 
-In this scenario, we are both storing the id of the `selectedUser` and the object of the `selectedUser`. This poses a lot of problems. First of all, when we change the selected user, we need to remember to update both references. But even worse, what if we update the user that is currently selected. Then we need to update both the reference in the `users` array and the `selectedUser`. This is easily overlooked and makes the implementation much more difficult and verbose.
+このシナリオでは`selectedUser`のIDと`selectedUser`のオブジェクトの両方が保存されています。
+このやり方は多くの問題を引き起こします。
+まず最初に、選択したユーザーを変更したら両方の参照を更新することを忘れてはいけません。
+そして、さらに悪い事に、現在選ばれているユーザーが更新されるとどうなりますか？、これには`users`配列の参照と`selectedUser`の両方を更新する必要が出てきます。
+これは見過ごされがちで、実装を難しく冗長にしてしまいます。
 
-# Solution
+# 解決策
 
 To fix this, we **shouldn't store state that can be derived**. If we store the `users` and the `selectedUserId`, we can easily derive which user is selected. This is logic that we can put in a selector or most probably in a composed selector. As a solution, we can define the state object as follows:
+
+この問題を修正するには、**派生可能な状態を持たない**事です。
+`users`と`selectedUserId`だけを持っていれば、どのユーザーが選択されているのかを簡単にたどる事ができます。
+このロジックは、セレクターまたは合成セレクターに入れることができます。
+定義を次のような状態オブジェクトにすることで問題を解決できます。
 
 ```ts
 export interface ApplicationState {
@@ -27,4 +38,4 @@ export interface ApplicationState {
 }
 ```
 
-Now, when we update a user, we only need to update the reference in the `users` array.
+これで、ユーザーを更新するのに`users`配列の参照を更新するだけでよくなります。

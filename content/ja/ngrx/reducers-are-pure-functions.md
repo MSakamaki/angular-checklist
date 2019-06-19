@@ -1,25 +1,27 @@
 ---
-title: reducers are pure functions
+title: reducerは純粋な関数にする
 ---
 
-# Problem
+# 問題点
 
-Reducers are responsible for updating the state in our application based on actions. It is extremely important that these are pure making them deterministic, so that every action, given the same input, will always have the same result. If they are not pure, we can no longer trust them to manage our state.
+リデューサーはアクションに基づいてアプリケーション内の状態を更新する作業を担当しています。
+同じ入力を与えられたすべてのアクションが純粋に常に同じ結果となるよう決定論的にすることは、非常に重要です。
+それらが純粋で無いのなら、私達は彼らを状態管理を任せることはできません。
 
-# Solution
+# 解決策
 
-By writing our reducers as pure functions, we are 100% sure that the reducer is deterministic and can be used to manage our state. A pure function has the following properties:
+レデューサーを純粋な関数として書くことによって、レデューサーが決定論的で、私達の状態を管理するために使えることが100％信頼できます。 純関数には以下の特性があります。
 
-* it does not depend on external state
-* it does not produce any side-effects
-* it does not mutate any of its inputs
-* if you call it over and over again, with the same arguments, you always get back the same results
+* 外部の状態には依存しません
+* 副作用はありません
+* 入力を変更しない
+* 同じ引数を使って何度実行しても、常に同じ結果が返されます。
 
-These properties are exactly what we need for our reducers to be deterministic and to comply with the key concepts of Redux.
+この特性がまさに、私達のリデューサーを決定論的にし、Reduxの重要な概念に従うために必要なものになります。
 
-In addition, pure functions are very easy to test.
+さらに、純粋関数はテストが非常に簡単になります。
 
-Example of an **impure** function:
+**純粋でない**関数の例:
 
 ```ts
 const state = 1;
@@ -32,9 +34,12 @@ function impureFunction(value: number) {
 impureFunction(1);
 ```
 
-The `impureFunction` relies on external state making it non-deterministic. We have no control of the state defined outside of the function as it is visible to many other functions.
+`impureFunction`は外部の状態に依存しており、決定論的ではありません。
+関数の外側に定義された`state`は、他の関数から見えてしまうので、コントロール不可能です。
 
 Instead, we can make this function **pure** by passing in the data it needs:
+
+代わりに必要なデータを渡してこの関数を**純粋**にすることができます。
 
 ```ts
 const state = 1;
@@ -47,6 +52,7 @@ function pureFunction(value: number, otherValue: number) {
 pureFunction(1, state);
 ```
 
-Now, `pureFunction` only relies on its parameters, does not mutate its arguments and has no side-effects.
+これで、`pureFunction`はパラメータにのみ依存しており、引数を変更することはなく、副作用もありません。
 
-The same is true for reducers. They have the following signature `(state, action) => state`. They do not rely on external state and shouldn't update its inputs.
+リデューサーについても同じことが言えます。リデューサーは以下のシグネチャ`(state, action) => state`.を持っています。
+彼らは外部の状態に頼らず、入力を変更するべきではありません。

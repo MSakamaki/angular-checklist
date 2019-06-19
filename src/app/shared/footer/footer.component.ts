@@ -11,6 +11,17 @@ import { isPlatformBrowser } from '@angular/common';
 export class FooterComponent {
   isBrowser: boolean;
 
+  public readonly languages = [
+    {
+      code: 'en-US',
+      text: 'English'
+    },
+    {
+      code: 'ja',
+      text: '日本語'
+    }
+  ];
+
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     @Inject(PLATFORM_ID) private platformId,
@@ -28,6 +39,14 @@ export class FooterComponent {
   changeLangage(lang) {
     if (this.isBrowser) {
       location.assign(`/${lang}${location.pathname.replace(`/${this.locale}`, '')}`);
+    }
+  }
+
+  transrationUrl(lang: string) {
+    if (this.isBrowser) {
+      return `/${lang}${location.pathname.replace(`/${this.locale}`, '')}`;
+    } else {
+      return '';
     }
   }
 }

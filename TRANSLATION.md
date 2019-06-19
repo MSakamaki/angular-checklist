@@ -12,7 +12,7 @@ The following tasks are required to add a new language.
 - Let's make build environment for language in `build:ssr` in scripts of package.json.
 - Register localeData of the language to be added to `app.module.ts` using `registerLocaleData()`.
 https://angular.io/guide/i18n#i18n-pipes
-- Add a language to the language selector of `src/app/shared/footer/footer.component.html`.
+- Add a language to the languages propety of `src/app/shared/footer/footer.component.ts`.
 - Make a target language directory by copying `en-US` in the content directory. And then run `yarn build-content`.
 
 Hooray! Now you can choose a new language.

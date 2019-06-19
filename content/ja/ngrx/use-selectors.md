@@ -1,22 +1,27 @@
 ---
-title: use selectors to select data from the store
+title: セレクタを使ってストアからデータを選ぶようにする
 ---
 
-# Problem
+# 問題点
 
-When we want to fetch data from the store, we can use queries to get the data out. These queries are functions that have the following signature `(state: T) => K`.
+ストアからデータを取得したい場合は、クエリを使用してデータを取得できます。 クエリの問い合わせは次のシグネチャ`(state: T) => K`といった関数です。
 
-While retrieving state from the store, we can execute some pretty complex and potentially inefficient or blocking logic. Every time the state changes, this logic will be re-executed.
+ストアから状態を取得する時に、かなり複雑で非効率だったりブロックするロジックが実行されます。
+これは状態が変更されるたびに再実行されます。
 
-Also, the plain queries we define cannot be used to compose new ones. This means that we have to define the same queries in multiple locations violating the DRY principle.
+また、私たちが定義した単純なクエリは新しいものを定義するため使えません。
+これは複数の場所で同じクエリを定義する必要があるため、DRYの原則に違反します。
 
-# Solution
+# 解決策
 
-`@ngrx/store` provides us with the concept of selectors. A selector helps us to build up queries that have a type signature of `(state: T): K`. The great benefit of these selectors is that they are composable.
+``@ngrx/store`はセレクタの概念を提供してくれます。
+セレクタは`(state: T): K`型シグニチャを持つクエリを作成するのに役立ちます。
+これらのセレクタの大きな利点は、それらが組み立て可能という事です。
 
-`@ngrx/store` exposes a `createSelector` function that accepts other selectors to create new ones based on these. This means that we only have to define every selector just once and reuse them in multiple places.
+`@ngrx/store`は他のセレクターを受け取って新しいセレクターを作成できる`createSelector`関数を持っています。
+つまり、すべてのセレクタを一度だけ定義し、それらを複数の場所で再利用することができます。
 
-Let's look at a simple example:
+簡単な例を見てみましょう。
 
 ```ts
 // Plain Selector
@@ -29,9 +34,11 @@ export const selectFeatureCount = createSelector(
 );
 ```
 
-Another benefit of composed selectors is that they use an optimization technique called memoization. This means that the selector logic will **not** be re-executed if the source selectors did not update. As a result, the complex logic we might execute to get data from the store is only executed when it is actually needed.
+合成セレクタのもう1つの利点は、メモ化(memoization)と呼ばれる最適化手法を使用していることです。
+セレクタの源泉が更新されなかった場合、セレクタのロジックは**再実行されません**。
+なので、ストアからデータを取得する時に実行されるだろう複雑なロジックは、必要なときにのみ実行されます。
 
-# Resources
+# 関連資料
 
 * [Selectors in Ngrx](https://github.com/ngrx/platform/blob/master/docs/store/selectors.md)
 * [NgRx: Parameterized selectors](https://blog.angularindepth.com/ngrx-parameterized-selector-e3f610529f8) by Tim Deschryver

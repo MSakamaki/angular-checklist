@@ -24,7 +24,7 @@ NgRxコアチームは **SHARI** と呼ばれる原則を考え出しました�
 たとえば、フィルタの結果をリストに反映するためにルーティングを使用したり、設定などの単純なデータを保存する必要がある場合は `BehaviorSubject`をサービスで使用します。
 Mike Ryanがこの話題について非常に良い講演をしました：[あなたはNgRxを必要としないかもしれません](https://youtu.be/omnwu_etHTY)
 
-# Resources
+# 関連資料
 
 - [Reducing the Boilerplate with NgRx](https://www.youtube.com/watch?v=t3jx0EC-Y3c) by Mike Ryan and Brandon Roberts
 - [Do we really need @ngrx/store](https://blog.strongbrew.io/do-we-really-need-redux/) by Brecht Billiet
