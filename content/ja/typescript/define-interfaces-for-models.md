@@ -1,16 +1,17 @@
 ---
-title: define interfaces for models
+title: モデルのインターフェースを定義する
 ---
 
-# Problem
+# 問題点
 
-TypeScript helps us to create type safe code. When working with REST APIs, we will get back data (a DTO) at runtime that has a specific format. In case we don't define types in our code for the objects we expect to get back, we lose the benefit of TypeScript.
+TypeScriptは我々エンジニアが安全なコードを作ることを助けてくれます。REST APIを用いて動いているとき、実行時に特定のフォーマットを持っているデータ(DTO)を取得します。しかし取得する予定のオブジェクトに対して、コード内で型を定義しないと、TypeScriptの利点は失われます。
 
-# Solution
+# 解決法
 
-We should define our models or DTOs (Data Transfer Objects) as interfaces instead of classes. Interfaces are virtual structures that only exist within the context of TypeScript. This means an interface does not generate code whereas a class is primarily syntactical sugar over JavaScript's existing prototype-based inheritance. Consequently, a class generates code when it's compiled to JavaScript.
+我々エンジニアはモデルかDTO(Data Transfer Objects)を、クラスの代わりにインターフェースとして定義すべきです。インターフェースとは、TypeScriptでのみ存在するvirtual(仮想)構造です。インターフェースはコードを生成しない一方で、クラスは主にJavascriptに存在しているプロトタイプベースを継承しているため、構文が本当にダメになります。つまりクラスは、JavaScriptにコンパイルされた時にコードを生成します。
+（注釈）つまりここで筆者は、「インターフェースはTSでのみ存在するためコンパイル後に何も残らない一方、クラスはJavaScriptでコンパイルするとコードが残ってしまうため、クラスは使わない方がいい」ということを主張している。
 
-For example, if we make a backend request that will return an a user object with the properties `userName` and `password`, both strings, we can define an interface `User` that describes the shape of the response:
+例えば、 `userName` と `password` （二つの文字列）を持つユーザーオブジェクトを返すバックエンドリクエストを行う場合、レスポンスの型を定義するインターフェース `User` を定義することができます。
 
 ```ts
 export interface User {
