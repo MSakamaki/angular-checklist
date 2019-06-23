@@ -1,4 +1,4 @@
 ---
-title: Performance
-summary: This category contains a list of practices which will help us boost the performance of our Angular applications. It covers different topics - from server-side pre-rendering and bundling of our applications, to runtime performance and optimization of the change detection performed by the framework.
+title: パフォーマンス
+summary: このカテゴリには、Angularアプリケーションのパフォーマンス向上に役立つプラクティスのリストが含まれています。 サーバーサイドでの事前レンダリングやアプリケーションのバンドリングから、ランタイムパフォーマンス、フレームワークによって実行される変更検出の最適化まで、さまざまなトピックが網羅されています。
 ---

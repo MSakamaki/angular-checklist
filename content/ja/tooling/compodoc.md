@@ -1,20 +1,22 @@
 ---
-title: use compodoc for documentation
+title: compodocを使ってドキュメントを作る
 optional: true
 ---
 
-# Problem
+# 問題点
 
-On boarding of new developers in your project can be quite difficult. Especially if the applications are getting bigger and bigger.
+アプリケーションが大きくなるにつれ、プロジェクトに新しい開発者が参加するのは非常に困難になっていきます。
 
-When the project becomes really big, even for developers that have been working on it for a long time, keeping an overview is not that easy.
+プロジェクトが非常に大きくなると、そこに長く居る開発者でさえ、概要を把握するのは難しいでしょう。
 
-# Solution
+# 解決策
 
-Documentation for our code is the solution to this problem. Of course, everyone knows that writing documentation is hard, boring and the documentation itself gets out of date quite quickly.
+この問題に対する解決策として、コードのドキュメンテーションを用意します。
+もちろん、ドキュメントを書くのは大変だし退屈で、ドキュメント自体がすぐに古くなってしまうことは誰もが知っています。
 
-To fix this, we can use compodoc to generate documentation from our code. This means that it doesn't take any time to write and it can never get out of date as it is generated from the existing code at all times.
+対策として、compodocを使ってコードからドキュメントを生成することができます。
+これは、書くのにに時間がかからず、既存のコードから生成されるため常に最新です。
 
-# Resources
+# 関連資料
 
 * [Compodoc](https://compodoc.app/)

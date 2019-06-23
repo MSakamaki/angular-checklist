@@ -1,19 +1,21 @@
 ---
-title: use prettier for code formatting
+title: コードの書式を整えるのにprettierを使う
 ---
 
-# Problem
+# 問題点
 
-Whenever we write code, we want this code to be formatted in a standardised way. This poses two problems.
+コードを書くときはいつも、標準化された方法で書式を整えたいでしょう。これには2つの問題があります。
 
-- We need to align everyone in the team to agree with the same standards.
-- We need to get all of their IDE's/editors aligned as well. This can be extremely difficult.
+- 私たちのチームは全員が同じ基準に同意するよう調整する必要があります。
+- 私たちは全員のIDE/エディタを同じものに必要があります。これはとても難しいでしょう。
 
-# Solution
+# 解決策
 
-Prettier is an opinionated code formatter that can fix both of these problems. It imposes a standard way of formatting and it has a CLI that makes sure the formatting happens the same way on all environments. Adding Prettier and running it as a pre-commit hook will make sure only formatted code can be checked in.
+Prettierは両方の問題を解決することに定評のあるコードフォーマッタです。
+Prettierは書式形成に標準を強制し、書式形成がすべての環境で同じように行われることを確認できるCLIを持っています。
+Prettierを追加してpre-commitフックとして実行すると、フォーマットされたコードのみチェックインできるようになります。
 
-# Resources
+# 関連資料
 
 - [Prettier](https://prettier.io/)
 - [Add prettier to Angular CLI schematic](https://github.com/schuchard/prettier-schematic)

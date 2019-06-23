@@ -1,14 +1,15 @@
 ---
-title: use switchMap only when you need cancellation
+title: キャンセルが必要な場合にのみswitchMapを使用してください。
 ---
 
-# Problem
+# 問題点
 
-In certain scenarios, using the wrong flattening operators from RxJS can result in unwanted behavior and race conditions.
+特定のシナリオでRxJSの間違った平坦化演算子(フラッディング・オペレーター)が使われると、予期しない動作や競合状態が発生する可能性があります。
 
-# Solution
+# 解決策
 
-For example, in an e-commerce application users can add and remove items from their shopping cart. The logic for removing an item could look like this:
+例にあげるとしたら、電子商取引アプリケーションで、ユーザーは自分のショッピングカートに商品を追加したり削除したりできるとしましょう。
+次にあるのはアイテムを削除するためのロジックです。
 
 ```ts
 removeItemButtonClick.pipe(
@@ -16,17 +17,21 @@ removeItemButtonClick.pipe(
 )
 ```
 
-Whenever the user clicks on the button to remove a certain item from the shopping cart, this action is forwarded to the application's backend. Most of the times this works as expected. However, the behavior depends on how rapidly items are removed from the cart. For example, either all items could be removed, or only some of them.
+ユーザーがボタンをクリックして特定の商品をショッピングカートから削除すると、このアクションはバックエンドに転送されます。
+ほどんどは予想どおりに機能するでしょうが、商品がカートからどれだけ早く削除されるかによって動きが変わってきます。
+たとえば、すべてのアイテムを削除した時や、一部のアイテムだけを削除したときです。
 
-In this example, `switchMap` is not the right operator because for every new action it will abort / cancel the previous action. This behavior makes `switchMap` unsafe for create, update and delete actions.
+この例では、`switchMap`演算子を使ってはいけません。
+何故なら新しいアクションがあるたびに前のアクションが中止/キャンセルされてしまうからです。
+この`switchMap`の振る舞いはcreate、update、deleteアクションが危なくなります。
 
-There are several other flattening operators that may be more appropriate:
+より状況にあった他の平坦化演算子があります
 
-- `mergeMap`: concurrently handle all emissions
-- `concatMap`: handle emissions one after the other
-- `exhaustMap`: when you want to cancel new emissions while processing a previous emission
+- `mergeMap`: 放出(emissions)を同時に処理する
+- `concatMap`: 放出を逐次的に処理する
+- `exhaustMap`: 何かの放出を処理している間は、新たな放出はキャンセルする
 
-So we could fix the problem from above by `mergeMap`:
+`mergeMap`で上にある問題を解決することができます。
 
 ```ts
 removeItemButtonClick.pipe(
@@ -34,10 +39,10 @@ removeItemButtonClick.pipe(
 )
 ```
 
-If the order is important we could use `concatMap`.
+順番が重要な時は`concatMap`を使うと良いでしょう。
 
-For more information see the article from [Nicholas Jamieson](https://twitter.com/ncjamieson) listed below.
+詳しい内容は、下記の[Nicholas Jamieson](https://twitter.com/ncjamieson)を参照してください。
 
-# Resources
+# 関連資料
 
 - [RxJS: Avoiding switchMap-Related Bugs](https://blog.angularindepth.com/switchmap-bugs-b6de69155524) by Nicholas Jamieson

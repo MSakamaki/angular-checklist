@@ -1,12 +1,13 @@
 ---
-title: use pipeable operators
+title: パイプ用の演算子を使う
 ---
 
-# Problem
+# 問題点
 
-Since the release of RxJS 6, patch operators have been removed. This means that we can no longer use them.
+RxJS 6のリリースでパッチ演算子は削除されました。
+これによりパッチ演算子を使うことはできません。
 
-This means the following is no longer possible:
+以下のようなコードはもう使えないでしょう。
 
 ```ts
 import 'rxjs/add/observable/interval';
@@ -20,9 +21,9 @@ Observable.interval(1000)
   .switchMap(x => mapToObservable(x))
 ```
 
-# Solution
+# 解決策
 
-Instead, we should be using pipeable operators.
+代わりに、パイプ用の演算子を使用してください。
 
 ```ts
 import { interval } from 'rxjs';
@@ -36,8 +37,9 @@ Observable.interval(1000)
   );
 ```
 
-Even if you are using the older versions of RxJS, all new code should be written using pipeable operators.
+古いバージョンのRxJSを使っていても、新しいコードはパイプ用の演算子を使って書かれるべきです。
 
-## Upgrading
+## アップグレード
 
-If you have a lot of code written using patch operators, you can use a script released written by Google engineers to do this upgrade automatically for you. You can find the script and how to use it in the [rxjs-tslint](https://github.com/ReactiveX/rxjs-tslint#migration-to-rxjs-6) package.
+パッチ演算子を使って書かれたコードが多い場合、Googleのエンジニアによって書かれたスクリプトで自動的にアップグレードできます。
+スクリプトと使い方は[rxjs-tslint](https://github.com/ReactiveX/rxjs-tslint#migration-to-rxjs-6)にあります。

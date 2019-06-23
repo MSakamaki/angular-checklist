@@ -1,10 +1,12 @@
 ---
-title: use ngIfAs to subscribe only once
+title: ngIfAsを使って１度だけ購読する
 ---
 
-# Problem
+# 問題点
 
-An Observable is lazy and unicast by default. This means that for every subscription, the Observable is executed. If the Observable is triggering a backend call when subscribed to, the following code will trigger two backend calls.
+Observableは、既定のふるまいとして怠惰(lazy)で単一の送信相手を指定して値を送信(unicast)します。
+これは購読(subscription)ごとにObservableが実行されることを意味します。
+購読時にObservableがバックエンド呼び出しをトリガーしている場合、次のコードは２回のバックエンド呼び出しが実行されます。
 
 ```ts
 @Component({
@@ -17,15 +19,17 @@ export class SomeComponent implements OnInit, OnDestroy {
 }
 ```
 
-This is not the intended behavior. We want to fetch the data only once.
+本来は１度だけしかデータを取りたくないので、これは意図した動作ではありません。
 
-# Solution
+# 解決策
 
 We can fix this problem in multiple ways, either with the `ngIfAs` syntax, or by making our Observable hot.
 
-## ngIfAs syntax
+この問題を解決するには、`ngIfAs`構文か、ObservableをHotにすることで解決できます。
 
-We can use an `*ngIf` to hide an element. We can also leverage it to _unpack_ an observable and bind the value to a variable. We can then use that variable inside of the template.
+## ngIfAs構文
+
+要素を隠すために`*ngIf`を使えますが、これを利用して観測値を_梱包_して値を変数にバインドし、その変数をテンプレート内で使うことが出来ます。
 
 ```ts
 @Component({
@@ -40,11 +44,13 @@ export class SomeComponent implements OnInit, OnDestroy {
 }
 ```
 
-By wrapping the components with a div that hides the element if no data is present, we were able to reduce the number of subscriptions from 2 to 1. This means that we only have a single subscription. Using the `as` syntax, we can also _catch_ the event from that observable and bind it to a variable and use that variable to pass it to our components.
+divでコンポーネントをラップし、データが無い場合に要素を非表示にするすることで購読数を一つに減らすことができました。これで購読は1回しか行われていません。
+`as`構文を使って観測イベントを取得してそれを変数にバインドし、その変数を使ってコンポーネントに受け渡すことも出来ます。
 
-Better yet, if we don't want to introduce another level of nesting, we can use the `<ng-container>` element. This elements lets us group sibling elements under an invisible container element that is not rendered.
+更に良くしたい時、無駄な要素で包みたくなければ `<ng-container>`要素を使うことができます。
+この要素を使用すると、描画され見えないコンテナ要素の下に親しい要素をグループ化できます。
 
-Here's what the code from above looks like using `<ng-container>`:
+上記のコードを`<ng-container>`にした例が以下になります。
 
 ```ts
 @Component({
@@ -59,20 +65,23 @@ export class SomeComponent implements OnInit, OnDestroy {
 }
 ```
 
-Now, the template will be rendered as:
+これにより、実際のテンプレートは以下のようにレンダリングされるでしょう。
 
 ```html
 <some-component data="data"></some-component>
 <some-other-component data="data"></some-component>
 ```
 
-## Make the Observable hot
+## Observable hotを作る
 
-We can also make our Observable hot so that the Observable will no longer trigger a backend call with every subscription. A hot Observable will share the underlying subscription so the source Observable is only executed once.
+すべての購読でObservableがバックエンド呼び出しを実行しなくするように、Observableをhotにする方法もあります。
+hotなObservableは基本となる購読を共有するため1回しか実行されません。
 
-This fixes our problem because it means it doesn't matter anymore if we have multiple subscriptions.
+複数の購読があっても問題にならなくなるため、これで問題が解決できます。
 
 To do this, we can use for example the `shareReplay` operator.
+
+`shareReplay`演算子を使う例を次に示します。
 
 ```ts
 @Component({
@@ -87,8 +96,8 @@ export class SomeComponent implements OnInit, OnDestroy {
 }
 ```
 
-> Note: we should specify `refCount: true` to prevent possible memory leaks.
+> 注意: メモリーリークを防ぐために`refCount：true`を指定しましょう。
 
-# Resources
+# 関連資料
 
 - [Multicasting operators in RxJS](https://blog.strongbrew.io/multicasting-operators-in-rxjs/) by Kwinten Pisman

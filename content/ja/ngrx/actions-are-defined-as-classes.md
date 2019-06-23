@@ -1,5 +1,5 @@
 ---
-title: define actions as classes
+title: アクションをクラスとして定義する
 ---
 
 # 問題点

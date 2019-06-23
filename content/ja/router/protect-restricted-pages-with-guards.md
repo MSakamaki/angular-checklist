@@ -1,18 +1,20 @@
 ---
-title: protect restricted pages with guards
+title: 制限のあるページをguardで保護する
 ---
 
-# Problem
+# 問題点
 
-Users should not be able to access pages that they don't have access to. We could hide the menu item so they could not navigate to it by clicking on that menu item but this means they can still manually type in the url to go to that page. We need some way to protect certain routes.
+アクセスしてはいけないページには、ユーザーがアクセスできないようにする必要があります。
+メニューの項目をクリックしても遷移できないように項目を非表示にすることもできますが、その場合はURLを手で撃ち込まれるとそのページに移動できてしまします。特定のルーターを保護するための何らかの方法が必要です。
 
-# Solution
+# 解決策
 
-We can use guards to allow or deny route changes. Every part of your application that should be limited to users with certain roles should be protected with guards.
+ルーターの変更を許可または拒否するためにguardを使うことが出来ます。
+特定の権限を持ったユーザーだけに使えるアプリケーションの機能は、guardで保護されるべきです。
 
-We can create a guard by creating a service that implements the `CanActivate` interface to avoid users going to a certain component or a `canLoad` interface to avoid entire modules to be loaded.
+guardの作成は、ユーザーが特定のコンポーネントにアクセスできないようにする`CanActivate`インターフェース、そしてモジュール全体がロードされないようにするための`canLoad`インターフェースを実装するサービスを作成することで実現できます。
 
-The following example shows how to use a `canActivate` guard.
+以下は`canActivate` guardの使用例です。
 
 ```ts
 @Injectable()
@@ -25,7 +27,7 @@ export class UserHasRoleGuard implements CanActivate {
 }
 ```
 
-We can now use it in our route definitions:
+これをルーターの定義で以下のように使います。
 
 ```ts
 [
@@ -34,4 +36,5 @@ We can now use it in our route definitions:
 ]
 ```
 
-You can see that the `canActivate` property on the route definition takes an array. This means we can add multiple guards which will be called chronologically in the order they are defined.
+あなたはルーター定義の`canActivate`プロパティには配列が使えることに気づくでしょう。
+これは、定義された順で呼び出される複数のguardを追加できることを意味しています。

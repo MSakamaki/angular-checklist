@@ -1,24 +1,29 @@
 ---
-title: don't manage subscriptions imperatively
+title: 購読(subscribe)を強制的に管理しない
 ---
 
-# Problem
+# 問題点
 
-When we subscribe to an Observable, we also need to unsubscribe to clean up its resources. Unsubscribing can be done like this:
+Observableを購読(subscribe)すると、購読をやめる時には購読を解除する必要があります。
+次のようにすれば購読を解除できます。
 
 ```ts
-// hold a reference to the subscription object
-const subscription = interval(1000).subscribe(console.log);
+// 購読オブジェクトへの参照を保持します。
+const 購読 = interval(1000).subscribe(console.log);
 
-// use the subscription object to kill the subscription
-subscription.unsubscribe();
+// 購読オブジェクトを使用して購読を強制終了する
+購読.unsubscribe();
 ```
 
-But if we have multiple subscriptions, we need to manage all of them. We could do this in an array but this gets extremely verbose. We want to avoid having to do this imperatively.
+しかし、複数の購読を行っている場合、そのすべてを管理しなければいけません。
+配列で管理することはできますが、非常に冗長になります。
+私たちはこれを命令的にしたくはありません。
 
-# Solution
+# 解決策
 
-RxJS provides us with the `takeUntil` operator, and a few other conditional operators. This operator will mirror the source observable until a certain event happens. In most cases, we want to stop listening to Observables when the component gets destroyed. This allows us to write something like this:
+RxJSは`takeUntil`演算子や他の条件付き演算子を提供してくれます。
+この演算子は特定のイベントが発生するまで観測可能なソースをミラーリングし、コンポーネントが破棄されたときにObservablesを監視しないようにできます。
+これは、次のように書くことができます。
 
 ```ts
 @Component({...})
@@ -45,15 +50,16 @@ export class SomeComponent implements OnInit, OnDestroy {
 }
 ```
 
-We create a `Subject` called `destroy$` and when the `ngOnDestroy` hook is called, we `next` a value onto the subject.
+`destroy$`という名前の`Subject`を作成し、`ngOnDestroy`フックが呼び出されると、subjectに値を`next`します。
 
-The manual subscribe we defined in the `ngOnInit` hook uses the `takeUntil` operator in combination with our subject. This means that the subscription will remain active **until** `destroy$` emits a value. After that, it will unsubscribe from the source stream and complete it.
+`ngOnInit`フックで定義した購読は`takeUntil`演算子を使いsubjectと結合させます。
+これは、`destroy$`が値を発行する**まで**、購読が生きていることを意味します。 その後、ソースのストリームの購読を中止して完了します。
 
-This is a lot better than imperatively handling the subscriptions.
+これは、購読を命令的に処理するよりもはるかに優れています。
 
-**Note:** Using the `async` pipe is even better as we don't have to think about this at all. It will hook into the destroy lifecycle hook and unsubscribe for us.
+**注意:** `async`パイプを使えば、このような問題を全く考える必要がないのでさらに良いでしょう。destroyライフサイクルフックに連携して購読を自動で中止してくれます。
 
-# Resources
+# 関連資料
 
 * [RxJS: don't unsubscribe](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) by Ben Lesh
 * [RxJS: Avoiding takeUntil leaks](https://blog.angularindepth.com/rxjs-avoiding-takeuntil-leaks-fb5182d047ef) by Nicholas Jamieson

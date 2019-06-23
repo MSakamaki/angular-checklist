@@ -1,17 +1,18 @@
 ---
-title: add 404 fallback route
+title: 404フォールバックのルーティングを追加する
 ---
 
-# Problem
+# 問題点
 
-There are multiple reasons why we need to make sure that we have a fallback for when a page is not found.
+ページが見つからない時にフォールバックするのは、いくつかの理由があります。
 
-- Our users are humans. Humans are quite error-prone. This means that they are likely to mistype a url at some point.
-- Over time, our applications will change. Users might bookmark urls for pages which are not supported anymore.
+- 私たちのユーザーは人間です。人間はよくミスをするので、URLを誤入力する可能性が高いでしょう。
+- そして、私たちのアプリケーションは変更されますが、ユーザーはすでにサポートされてないページのURLをブックマークしているかもしれません。
 
-# Solution
+# 解決策
 
-Every application should define a 404 route. This is a route to be shown whenever the user tries to go to a non existing route.
+すべてのアプリケーションは404へのルーティングを定義する必要があるでしょう。
+これは、ユーザーがありえないルーティングを行った時に必ず表示されるルートです。
 
 ```ts
 [
@@ -21,4 +22,5 @@ Every application should define a 404 route. This is a route to be shown wheneve
 ]
 ```
 
-The last route definition uses a wildcard as a path. Since the Angular router will render the first definitions that matches, be sure to always put this route definition last!
+最後のルート定義はパスにワイルドカードを使います。
+Angularルータは最初に一致した定義を描画するため、必ずこのルート定義は最後に配置してください。

@@ -1,22 +1,24 @@
 ---
-title: use onPush CD strategy on dumb components
+title: 最小限の処理しかしないコンポーネントにはonPush CD戦略を使用する
 ---
 
-# Problem
+# 問題点
 
-Change detection (CD) in Angular is performed from top to bottom. This means that everything is only checked once. This is a huge difference compared to AngularJS where change detection was performed in cycles until everything was considered stable.
+Angularの変更検出（CD）は上から下に向けて実行されます。
+これは全てが一度だけチェックされることを意味しています。
+このふるまいは全てが安定するまで変更検出サイクルが実行されていたAngularJSと比べると大きく変わっています。
 
-However, it still means that everything is checked every time CD is triggered, even things that we know for sure have not changed.
+それでも、CDが起動される毎に全てがチェックされてしまう事は事実です。
 
-# Solution
+# 解決策
 
-Angular components can use different strategies for change detection. They can either use `Default` or `OnPush`.
+Angularのコンポーネントは変更検出では`Default`や`OnPush`のような戦略を使うことが出来ます。
 
-The default strategy means that the component will be checked during every CD cycle.
+初期設定(`Default`)では、CDサイクルごとにコンポーネントがチェックされます。
 
-With the `OnPush` strategy, the component (and all of its children!) will only be checked if one of its `@Input`s have changed (reference check) **or** if an event was triggered within the component.
+`OnPush`戦略ではコンポーネント（とそのすべての子コンポーネント）は`@Input`の一つが変更された場合（参照チェック）**または**イベントがコンポーネント内でトリガーされた場合にのみチェックが走ります。
 
-This means that we can easily tell Angular to not run CD for huge parts of our component tree, speeding up CD a lot! We can enable the `OnPush` strategy like this:
+これを利用して`OnPush`戦略を有効にすれば、コンポーネントツリーの大部分に対してCDを実行しないよう、簡単にAngularへ指示が可能となるため、大幅な高速化を可能となります。
 
 ```ts
 @Component({
@@ -25,13 +27,15 @@ This means that we can easily tell Angular to not run CD for huge parts of our c
 })
 ```
 
-**Note 1:** This also implies that we should always try to work immutable. Let's say that we add an element to an array by mutating the array and we pass the array to a component to visualise it. If we apply the `OnPush` strategy for this component, we wouldn't see the changes in the UI. Angular will not check if the array's content has changed. It will only check the reference. As the reference has not changed, it means that CD will not run for that component and the view will not be updated.
+**注釈 1:** これは、我々のコードが常に不変となるよう努めるべきであることを意味しています。 ある配列に要素を追加して配列を変化させます、そしてそれを視覚化するために`OnPush`戦略が適用されたコンポーネントへ渡します。
+このコンポーネントは参照のみをチェックしており、Angularは配列の内容までチェックしていないためCDはそのコンポーネントに対して実行されず、画面も更新されません。
 
-**Note 2:** This also means that, every component we apply this strategy to, has to be dumb. If the component fetches its own data, we cannot have the `OnPush` strategy. Because in that case, the component's `@Input`s wouldn't be the only reason to run CD, but also data being fetched.
+**注釈 2:** また、私たちがこの戦略を適用するすべての要素は、ダム(最小限の処理しかしない)でなければならないことを意味します。
+もしコンポーネント自身が自分のデータを取得するような振る舞いをするならば`OnPush`戦略は使えません。でなければ、`@Input`がCDを実行する唯一の理由ではなくなてしまい、データが取得される事もトリガーとしなければならなくなります。
 
-**Note 3:** When using the `async` pipe, it will automatically call `markForCheck` under the hood. This marks the path to that component as "to be checked". When the next CD cycle kicks in, the path to that component is not disabled and the view will be updated.
+**注釈 3:** `async`パイプを使うと内部で自動的に`markForCheck`が呼び出されます。これによって、そのコンポーネントへのパスが「チェック対象」としてマークされます。なので、次のCDサイクルが始まると、コンポーネントのパスは残っておりビューが更新されます。
 
-# Resources
+# 関連資料
 
 - [Angular change detection explained](https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html) by Pascal Precht
 - [Everything you need to know about change detection in Angular](https://blog.angularindepth.com/everything-you-need-to-know-about-change-detection-in-angular-8006c51d206f) by Maxim Koretskyi

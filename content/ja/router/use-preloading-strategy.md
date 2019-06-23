@@ -1,22 +1,25 @@
 ---
-title: use preloading strategy
+title: プリロード(事前読み込み)戦略を使う
 ---
 
-# Problem
+# 問題点
 
-When we use lazy loading, we are only loading the code that is needed for the first page render. Modules that are not yet needed are not loaded.
+遅延ロードを使用すると、最初のページの描画に必要なコードのみを読み込み、必要とされていないモジュールはロードされません。
 
-By default, the next modules will be loaded whenever the user requests them. This is not ideal in every scenario because it means that whenever a user requests a url, they have to wait until the module is loaded and parsed.
+既定では、ユーザーが要求するたびに必要なモジュールがロードされます。
+これは、ユーザーがURLにアクセスするたび、モジュールが読み込まれ解析されるまで待機する必要があることを意味するため、すてべの場合において理想的なシナリオではありません。
 
-# Solution
+# 解決策
 
-Depending on the application you are building and whether you have to deal with low bandwidth, it might be better to use a different strategy other than loading modules on request.
+構築中のアプリケーションの仕様や、低い帯域幅に対処する必要があるかなど、要件に応じて、要求されたモジュールをロードする以外の方法を検討する事を勧めします
 
-When working on an application that will be used only on a steady WiFi connection, it makes sense to preload all of the modules when the CPU is idle. If our application will be used mainly on a slow 3G connection, we should only load the modules that are most likely used.
+安定したWiFi接続で使われるアプリケーションで作業するときは、CPUが待機中のときにすべてのモジュールをプリロード(事前読み込み)するのが理にかなっています。
+アプリケーションが遅い3G接続で使用されるような場合は、必要とされる可能性が一番高いモジュールだけをロードするべきです。
 
-## Load all modules after first page render
+## 最初のページの描画した後に、すべてのモジュールをロードする
 
-One strategy provided by the Angular team is to preload all modules when the CPU becomes idle. This means that, after the first page render, the modules will all be loaded in the background.
+Angularチームが提供する戦略の1つとして、CPUが待機中になったとき、すべてのモジュールをプリロードさせます。
+これは、最初のページが描画された後、全てのモジュールがバックグラウンドで読み込まれます。
 
 ```ts
 @NgModule({
@@ -31,11 +34,12 @@ One strategy provided by the Angular team is to preload all modules when the CPU
 export class AppModule {}
 ```
 
-## Defining a custom preloading strategy
+## カスタムプリロード戦略の設定
 
-If our users can be both on mobile and on WiFi, it might make sense to only preload the modules if they are on WiFi. To do this, we can implement a custom preloading strategy.
+私達のユーザーがモバイルとWiFiの両方を使っている場合、WiFiに繋げている時だけモジュールをプリロードするのが理にかなっています。
+これを実現するために、カスタムプリロード戦略を実装できます。
 
-A custom preloading strategy is implemented as a class and implements the `PreloadingStrategy` interface.
+カスタムプリロード戦略はクラスとして実装でき、`PreloadingStrategy`インターフェースを実装します。
 
 ```ts
 // custom.preloading-strategy.ts
@@ -57,13 +61,16 @@ export class MyCustomPreloadingStrategy implements PreloadingStrategy {
 export class AppModule {}
 ```
 
-## Data-driven bundling
+## データ駆動バンドリング
 
-Another way is to use [Guess.js](https://github.com/guess-js/guess), a data-driven bundling approach. The goal with Guess.js is to minimize the bundle layout configuration, make it data-driven, and much more accurate. Guess.js will will figure out which bundles to be combined together and what pre-fetching mechanism to be used.
+[Guess.js](https://github.com/guess-js/guess)を使う方法もあります、これはデータ駆動型のバンドリングアプローチを使用しています。
+Guess.jsの目標は、バンドルのレイアウト設定を最小限に抑え、データ駆動型にし、それをさらに的確にすることです。
+Guess.jsはどのバンドルを組み合わせ、そしてどのプリフェッチ機構を使うのかを判断します。
 
 Guess.js can also be used with the Angular CLI. Here's an [example](https://github.com/mgechev/guess-js-angular-demo).
+Guess.jsはAngular CLIでも使うことが出来、[これがその例](https://github.com/mgechev/guess-js-angular-demo)です。
 
-# Resources
+# 関連資料
 
 - [Angular Router: Preloading Modules](https://vsavkin.com/angular-router-preloading-modules-ba3c75e424cb) by Victor Savkin
 - [Introducing Guess.js - a toolkit for enabling data-driven user-experiences on the Web](https://blog.mgechev.com/2018/05/09/introducing-guess-js-data-driven-user-experiences-web/) by Minko Gechev

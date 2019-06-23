@@ -24,8 +24,6 @@ export interface ApplicationState {
 
 # 解決策
 
-To fix this, we **shouldn't store state that can be derived**. If we store the `users` and the `selectedUserId`, we can easily derive which user is selected. This is logic that we can put in a selector or most probably in a composed selector. As a solution, we can define the state object as follows:
-
 この問題を修正するには、**派生可能な状態を持たない**事です。
 `users`と`selectedUserId`だけを持っていれば、どのユーザーが選択されているのかを簡単にたどる事ができます。
 このロジックは、セレクターまたは合成セレクターに入れることができます。

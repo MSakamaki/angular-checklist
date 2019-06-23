@@ -1,26 +1,29 @@
 ---
-title: use the async pipe
+title: asyncパイプを使う
 ---
 
-# Problem
+# 問題点
 
-In Angular, everything async is handled by Observables and they are triggered by subscribing to them. Whenever we do so, it is very important to also unsubscribe. Unsubscribing will clean up the resources being used by this stream. If we neglect to do this, we might introduce memory leaks.
+Angularでは、非同期をObservablesによって処理しており、それらを購読(subscribe)することによって実行されます。
+購読する時は購読を解除することも非常に重要です。
+購読を解除するとストリームによって使用されているリソースが開放されます。
+これを怠ると、メモリリークが発生する可能性があります。
 
-If we manually subscribe, it also means that we have to manually unsubscribe. This is something that is easily forgotten.
+手動で購読する場合、同じく手動で購読を解除する必要がありますが、これは忘れがちです。
 
-# Solution
+# 解決策
 
-Instead of manually subscribing, we can use the `async` pipe provided by Angular.
+手動で購読する代わりに、Angularの提供する`async`パイプを使うことができます。
 
-The async pipe will:
+asyncパイプは以下のような事を行います:
 
-- subscribe to an Observable
-- unsubscribe from the Observable when the component is destroyed by hooking into the `onDestroy` hook
-- mark this component as "to be checked" for the next change detection cycle
+- Observableを購読する
+- コンポーネントが破壊されたときに、`onDestroy`フックに連携してObservableから登録を解除する
+- 次の変化検出サイクルのために、このコンポーネントを「チェック対象」としてマークする
 
-Using the `async` pipe as much as possible will make sure all the resources are cleaned up properly and reduce the likelihood of memory leaks.
+なるべく`async`パイプを使うことでリソースが正しくクリーンアップされ、メモリリークの可能性を減らせます。
 
-Here's an example:
+これがその例です:
 
 ```ts
 @Component({
@@ -32,8 +35,9 @@ export class SomeComponent {
 }
 ```
 
-Here, we set up an `interval` that emits a value every second. This is a long-living Observable and because we are using the `async` pipe, the resource (subscription) is cleaned up when the component is destroyed.
+これは毎秒値を出す`interval`を設定しています。
+これは長命のObservableですが、`async`パイプを使っているのでリソース（購読）はコンポーネントが破壊されたときに開放されます。
 
-# Resources
+# 関連資料
 
 [Three things you didn't know about the async pipe](https://blog.thoughtram.io/angular/2017/02/27/three-things-you-didnt-know-about-the-async-pipe.html) by Christoph Burgdorf

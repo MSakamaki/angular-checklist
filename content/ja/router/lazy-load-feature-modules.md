@@ -1,18 +1,22 @@
 ---
-title: lazy load feature modules
+title: 機能(feature)モジュールを遅延ロードする
 ---
 
-# Problem
+# 問題点
 
-When working with SPAs, we need to ship an entire application to the client. The more bytes we need to ship, the slower it will be to load but also to parse. This will greatly influence the TTI (Time to Interactive) of our application.
+SPAの場合はクライアントにアプリケーション全体を配送する必要があります。
+配送する必要のあるバイト数が多くなると、読み込みだけでなく解析する時間も多くなります。
+これは私達のアプリケーションのTTL（Time to Interactive）に大きな影響を与えます。
 
-We are shipping way too much JavaScript to the client.
+私達はあまりにも大きなJavaScriptをクライアントに配送しています。
 
-# Solution
+# 解決策
 
-Angular provides us with a module system. When we break up our application in feature modules, we can leverage this to only load the modules that are needed for the first page render. The other modules can be lazily loaded only when they are needed. We can do this, when the user requests them or via a more sophisticated preloading strategy.
+Angularはモジュールシステムを提供します。
+アプリケーションを機能モジュールに分割することで、最初のページのレンダリングに必要なモジュールだけを読み込み、他のモジュールは必要なときだけ遅延ロードできます。
+これにより、ユーザーの必要に応じた、もしくは、より洗練された事前ロード戦略を行うことができます。
 
-The following module is **not** using lazy loading to load the `UsersModule`.
+次のモジュールは `UsersModule`をロードするための遅延ロードを使って**いません**。
 
 ```ts
 // app.routing.ts
@@ -35,7 +39,9 @@ const routes: Routes = [
 export class AppModule {}
 ```
 
-This means that the `UsersModule` will be added to the main bundle. The main bundle contains all the code that is needed for the first page load. As the `UsersModule` is only needed when the user specifically navigates to the `/users` page, it doesn't make sense to load it up front. Let's leverage lazy loading to fix this.
+これは `UsersModule`がメインバンドルに追加されることを意味しています。
+メインバンドルは、最初のページの読み込みに必要なコードが全部含まれています。
+`UsersModule`はユーザーが`/users`ページに移動したときにのみ必要なので、事前にロードしておいても意味はありません、修正するために遅延ロードを利用しましょう。
 
 ```ts
 // app.routing.ts
@@ -57,13 +63,15 @@ const routes: Routes = [
 export class AppModule {}
 ```
 
-We updated the `/users` route to use the `loadChildren` property. This points to the module file of the `UsersModule` and always has a fixed format: `${pathToModule}#${nameOfTheModule}`.
+`/users`ルートで`loadChildren`プロパティをうように更新しました。
+この`${pathToModule}#${nameOfTheModule}`フォーマットは常に固定で、`UsersModule`のモジュールファイルを示しています。
 
-Also note that we no longer add the `UsersModule` to the imports of the `AppModule`. This is important because otherwise lazy loading wouldn't work as expected. If the `UsersModule` was referenced by the `AppModule` the code for that module would be added to the main bundle.
+また、 `AppModule`のインポートで`UsersModule`を追加していない事にも注意してください。
+追加すると遅延ロードは期待通りには動作しないため、この点は重要です。
+`UsersModule`が`AppModule`によって参照されると、`UsersModule`のコードはメインバンドルに追加されてしまいます。
 
-By using `loadChildren` and removing the module import from the `AppModule`, the `UsersModule` will be packaged in its own bundle and will only be loaded when the user navigates to `/users`.
+`loadChildren`を使用しつつ、`AppModule`からモジュールのインポートを削除することで、 `UsersModule`は独自のバンドルに分離され、ユーザーが`/users`に移動したときだけ読み込まれるようになります。
 
-
-# Resources
+# 参考資料
 
 [The cost of JavaScript](https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4) by Addy Osmani

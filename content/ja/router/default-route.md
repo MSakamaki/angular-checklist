@@ -1,14 +1,18 @@
 ---
-title: make sure default route is defined
+title: デフォルトのルートが定義されていることを確認してください
 ---
 
-# Problem
+# 問題点
 
-When users type in the url for your application, they do not know all the routes of our application. We need to make sure that we always have a landing page or a redirect set up.
+ユーザーはあなたのアプリケーションのURLを入力するとき、アプリケーションにどのようなルートがあるかを知りません。
+そのため、常にランディングページやリダイレクトの設定がされてることを確認する必要があります。
 
-# Solution
+# 解決策
 
 Every application should define a default route. This is the route that will be used whenever the user goes to `/`.
+
+アプリケーションは全般的にデフォルトルートを定義する必要があります。
+デフォルトルートはユーザが`/`に行くたびに使われるルートです。
 
 ```ts
 [
@@ -17,4 +21,4 @@ Every application should define a default route. This is the route that will be 
 ]
 ```
 
-Note that `pathMatch: full` should be used to make sure that this route definitions is only triggered when the user is going to `/`.
+ユーザが`/`に行こうとした時だけ動作するよう、`pathMatch: full`を設定しなければならない事に注意してください。

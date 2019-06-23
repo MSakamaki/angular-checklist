@@ -1,18 +1,20 @@
 ---
-title: avoid nested subscriptions
+title: 入れ子になったsubscriptionを避ける
 ---
 
-# Problem
+# 問題点
 
-Sometimes we need to aggregate values from multiple observables or deal with nested observables to perform an action. In that case, you could  subscribe to an observable in the subscribe block of another observable. This makes handling subscriptions way more difficult and feels like callback hell all over again.
+場合によっては、アクションを実行するために、複数のobservableから値を集計したり、入れ子になったobservableを処理したりする必要があります。
+そのような場合、他のobservableのsubscribeブロックでobservableをsubscribeすることができますが、これは、subscribeのを複雑にしてしまい、コールバック地獄のようになってしまいます。
 
-# Solution
+# 解決策
 
-For aggregating values or dealing with nested observables we can use one of the combination or flattening operators.
+値を集約したり、入れ子になったobservableを処理するために、結合演算子(コンビネーション・オペレーター)または平坦化演算子(フラッディング・オペレーター)を使うことが出来ます。
 
-Let's consider the following example: In an e-commerce system we are fetching a product and based on that product we want to fetch similar ones.
+次の例を考えてみましょう。
+電子商取引システムでは、何かの商品を取得した時、その商品に関連する商品も取得するとします。
 
-A naive solution could look like this:
+単純な解決策は次のようになります。
 
 ```ts
 fetchProduct(1).subscribe(product => {
@@ -22,11 +24,11 @@ fetchProduct(1).subscribe(product => {
 });
 ```
 
-We first fetch the product and once the request is resolved we fetch similar products inside the subscribe block of the first, most outer observable.
+最初に、商品を取得してリクエストが解決されると一番外側のobservableブロックのsubscribeブロック内で関連商品を取得します。
 
-This is considered to be an anti-pattern or code smell.
+これはアンチパターンかcode smell(深刻な問題があるかもしれない)と見なされます。
 
-Instead we can use one of the flattening operators to get rid of this code smell and solve it more elegantly:
+このcode smellを取り除いて、より優雅に解決するため、一つの平坦化演算子(`switchMap`)を使います。
 
 ```ts
 fetchProduct(1).pipe(
@@ -34,9 +36,11 @@ fetchProduct(1).pipe(
 ).subscribe(...)
 ```
 
-Here's another example: A simple list view where the user can filter and paginate the list. Whenever the user goes to the next page we also need to take into account the filter:
+また、これは別の例です。
+ユーザーが一覧をフィルタしてページ番号を付けられる単純な一覧画面です。
+ユーザーが次のページに行くときにフィルターを考慮に入れる必要があります。
 
-Naive solution:
+素朴な例
 
 ```ts
 nextPage$.subscribe(page => {
@@ -48,9 +52,9 @@ nextPage$.subscribe(page => {
 });
 ```
 
-That's again not the most idiomatic solution because we have introduced several nested subscriptions.
+複数の入れ子になったsubscriptionを使っているので、これも良い解決策でありません。
 
-Let's fix this with a combination and flattening operator:
+これを結合演算子(`withLatestFrom`)と平坦化演算子で修正しましょう。
 
 ```ts
 nextPage$
@@ -63,7 +67,7 @@ nextPage$
   });
 ```
 
-Or when we want to listen for changes in both the `nextPage$` and the `filter$` we could use `combineLatest`:
+`nextPage$`と`filter$`の両方の変更を監視したい場合は、`combineLatest`を使います。
 
 ```ts
 combineLatest(nextPage$, filter$)
@@ -73,11 +77,11 @@ combineLatest(nextPage$, filter$)
   });
 ```
 
-Both solutions are much more readable and they also reduces the complexity of our code.
+どちらの方法も読みやすく、コードの複雑さも軽減されます。
 
-Here are some very common combination and flattening operators:
+以下は良く使われる結合演算子と平坦化演算子です。
 
-**Combination Operators**:
+**結合演算子**:
 
 - `combineLatest`
 - `withLatestFrom`
@@ -88,7 +92,7 @@ Here are some very common combination and flattening operators:
 - `pairwise`
 - `startWith`
 
-**Flattening Operators**:
+**平坦化演算子**:
 
 - `switchMap`
 - `mergeMap`

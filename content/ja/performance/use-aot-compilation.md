@@ -1,26 +1,30 @@
 ---
-title: use AOT compilation for prod builds
-source: https://github.com/mgechev/angular-performance-checklist
+title: プロダクションビルドにAOTコンパイルを使用する
+source: https://github.com/mgechev/angular-performance-checklist/blob/master/README.ja-JP.md
 author:
   name: Minko Gechev
   url: https://twitter.com/mgechev
 ---
 
-# Problem
+# 問題点
 
-The biggest part of the code that we ship to the browser when we use Angular is the compiler. The compiler is needed to transform our HTML-like templates to Javascript. This is doesn't only has a negative impact on the bundle size but also on the performance as this process is computationally expensive.
+Angularを使用したときにブラウザに配られるコードの大部分はコンパイラです。
+HTMLライクなテンプレートをJavascriptに変換するにはコンパイラが必要になります。
+このプロセスはバンドルサイズだけでなく、計算コストも高いため性能にも悪影響を与えます。
 
-# Solution
+# 解決策
 
-We can avoid shipping the compiler by performing the compile step as part of the build step. We can achieve this by using AOT.
+AOTを使う事で、ビルド作業の一環としてコンパイルを行い、コンパイラの出力を避けることができます。
 
-AoT can be helpful not only for achieving more efficient bundling by performing tree-shaking, but also for improving the runtime performance of our applications. The alternative of AoT is Just-in-Time compilation (JiT) which is performed runtime, therefore we can reduce the amount of computations required for rendering of our application by performing the compilation as part of our build process.
+AoTは、ツリーシェイキングにより効率的なバンドルを生成するだけでなく、アプリケーション実行時のパフォーマンスを向上させます。
+AoTの代替になるのは実行時に実行されるジャストインタイムコンパイル（JiT）です。
+つまり、ビルドプロセスの一環としてコンパイルすることで、アプリケーションのレンダリングに必要な計算量を減らすことができます。
 
-# Tooling
+# ツール一覧
 
-* [@angular/compiler-cli](https://github.com/angular/angular/tree/master/packages/compiler-cli) - a drop-in replacement for [tsc](https://www.npmjs.com/package/typescript) which statically analyzes our application and emits TypeScript/JavaScript for the component's templates.
-* [angular2-seed](https://github.com/mgechev/angular-seed) - a starter project which includes support for AoT compilation.
-* [Angular CLI](https://cli.angular.io/) Using the ng serve --prod
+* [@angular/compiler-cli](https://github.com/angular/angular/tree/master/packages/compiler-cli) - アプリケーションを静的解析して、コンポーネントのテンプレート用TypeScript/JavaScriptを発行する[tsc](https://www.npmjs.com/package/typescript)の代替品。
+* [angular2-seed](https://github.com/mgechev/angular-seed) - AoTコンパイルのサポートを含むスタータープロジェクト。
+* [Angular CLI](https://cli.angular.io/) ng serve --prod を利用する
 
 # Resources
 
