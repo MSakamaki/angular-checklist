@@ -1,5 +1,5 @@
 ---
-title: @angular/cliを使う
+title: ＠angular/cliを使う
 optional: true
 ---
 

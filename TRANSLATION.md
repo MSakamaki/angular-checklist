@@ -36,6 +36,9 @@ Translation of content is editing files in the `content/[target lang]` directory
 
 You don't have to make all the files at once. but when it's missing it will be displayed in original English.
 
+**Note:** If you set char such as `*` or `@` at the beginning of metadata such as `title:`, the translation will be broken.
+Use double-byte characters or devise a text.
+
 ## Reflect the translated content
 
 See [CONTRIBUTING.md](https://github.com/angular-checklist/angular-checklist/blob/master/CONTRIBUTING.md).

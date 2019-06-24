@@ -1,5 +1,5 @@
 ---
-title: *ngForを使う時はtrackByオプションを利用する
+title: ＊ngForを使う時はtrackByオプションを利用する
 source: https://github.com/mgechev/angular-performance-checklist/blob/master/README.ja-JP.md#use-trackby-option
 author:
   name: Minko Gechev
@@ -9,7 +9,7 @@ author:
 # 問題点
 
 `*ngFor`ディレクティブはコレクションを描画するのに使われます。
- 基本的な動作として`* ngFor`は参照によってオブジェクトの一意性を識別しています。
+ 基本的な動作として`*ngFor`は参照によってオブジェクトの一意性を識別しています。
 
 つまり、開発者がアイテムのコンテンツの更新中にオブジェクトへの参照を破壊した場合、Angularはそれを古いオブジェクトが削除されて新しいオブジェクトが作成されたと認識します。
 その結果として、リストにある古いDOMノードを破棄し、同じ場所に新しいDOMノードを追加します。
