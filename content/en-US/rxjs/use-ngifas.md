@@ -81,11 +81,13 @@ To do this, we can use for example the `shareReplay` operator.
 })
 export class SomeComponent implements OnInit, OnDestroy {
   sharedData$ = data$.pipe(
-    shareReplay(1)
+    shareReplay({ bufferSize: 1, refCount: true })
   );
   ...
 }
 ```
+
+> Note: we should specify `refCount: true` to prevent possible memory leaks.
 
 # Resources
 
